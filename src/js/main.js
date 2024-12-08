@@ -4,6 +4,8 @@ const pipe = document.querySelector('.pipe')
 const start = document.querySelector('.start')
 const gameOver = document.querySelector('.game-over')
 
+let score = 0; // Add this to the list of global variables
+
 audioStart = new Audio('./src/audio/audio_theme.mp3')
 audioGameOver = new Audio('./src/audio/audio_gameover.mp3')
 
@@ -11,6 +13,10 @@ audioGameOver = new Audio('./src/audio/audio_gameover.mp3')
 const startGame = () => {
   pipe.classList.add('pipe-animation')
   start.style.display = 'none'
+
+  // Reset score when the game starts
+  score = 0;
+  document.getElementById('score').textContent = score;
 
   // audio
   audioStart.play()
@@ -41,6 +47,7 @@ const jump = () => {
     mario.classList.remove('jump')
   }, 800)
 }
+
 
 const loop = () => {
   setInterval(() => {
@@ -75,9 +82,14 @@ const loop = () => {
       
       gameOver.style.display = 'flex'
       
-      clearInterval(loop)
+      clearInterval(gameloop)
     }
-  }, 10)
+    else if (pipePosition < 0) {
+      // Pipe passed Mario
+      score++; // Increment score
+      document.getElementById('score').textContent = score// Update the display
+    }
+    }, 10)
 }
 
 loop()
