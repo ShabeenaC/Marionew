@@ -20,7 +20,7 @@ const startGame = () => {
 
   // audio
   audioStart.play()
-}
+
 
 const restartGame = () => {
   gameOver.style.display = 'none'
@@ -38,7 +38,7 @@ const restartGame = () => {
   audioStart.play()
   audioStart.currentTime = 0;
 
-}
+
 
 const jump = () => {
   mario.classList.add('jump')
